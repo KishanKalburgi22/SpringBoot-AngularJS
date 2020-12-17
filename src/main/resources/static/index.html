@@ -1,0 +1,57 @@
+<html ng-app="demoModule">
+<head>
+<title>Spring Boot AngularJS example</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+<script src="js/app.js"></script>
+<script src="js/controller/controller.js"></script>
+<script src="js/service/service.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<div class="jumbotron">
+	<h2 class="text-center text-danger">
+		<span class="glyphicon glyphicon-dashboard"></span> Welcome to User
+		Dashboard
+	</h2>
+</div>
+<body ng-controller="UserController" data-ng-init="getUsers()">
+	<div class="panel-body">
+		<table class="table table-condensed table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>NAME</th>
+					<th>DESCRIPTION</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr ng-repeat="row in users">
+					<td>{{row.id}}</td>
+					<td><span ng-show="!edit">{{row.name}}</span><input
+						class="id_{{row.id}}" ng-show="edit" value="{{row.name}}"></td>
+					<td><span ng-show="!edit">{{row.description}}</span><input
+						class="id_{{row.id}}" ng-show="edit" value="{{row.description}}"></td>
+					<td><button class="btn btn-primary " ng-click="edit=true"
+							ng-hide="edit">Edit</button>
+						<button class="btn btn-primary " ng-click="update(row)"
+							ng-show="edit">Update</button></td>
+					<td><button class="btn btn-danger " ng-click="delete(row.id)"
+							ng-hide="edit">Delete</button>
+						<button class="btn btn-danger " ng-click="edit=false"
+							ng-show="edit">Cancel</button></td>
+				</tr>
+				<tr>
+					<td><input id="id"></td>
+					<td><input id="name"></td>
+					<td><input id="description"></td>
+					<td><button class="btn btn-success" ng-click="addUser()">Add</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<span class="small text-muted">{{message}}</span>
+</body>
+</html>
